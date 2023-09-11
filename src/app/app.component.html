@@ -1,0 +1,148 @@
+<div class="app">
+  <mat-card>
+    <form [formGroup]="userForm">
+      <mat-card-header>
+        <mat-card-title>Create user</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input
+              matInput
+              placeholder="first name"
+              formControlName="firstName"
+            />
+            <mat-error *ngIf="firstName?.hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input
+              matInput
+              placeholder="last name"
+              formControlName="lastName"
+            />
+            <mat-error *ngIf="lastName?.hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field color="accent">
+            <mat-label> Birthday</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              formControlName="dateOfBirth"
+              placeholder="Birthday"
+              onfocus="this.blur()"
+            />
+            <mat-error *ngIf="dateOfBirth?.hasError('required')">
+              Birthday is <strong>required</strong>
+            </mat-error>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="framework">
+          <mat-form-field>
+            <mat-label>Framework</mat-label>
+            <mat-select formControlName="framework">
+              <mat-option
+                *ngFor="let item of frameworks"
+                [value]="item"
+                (click)="selectFramework(item)"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Framework version</mat-label>
+            <mat-select formControlName="frameworkVersion">
+              <mat-option
+                *ngFor="let item of selectedFrameworkVersions"
+                [value]="item"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              formControlName="email"
+              placeholder="email"
+              (focusout)="checkEmail()"
+            />
+            <mat-error
+              *ngIf="email?.hasError('email') && !email?.hasError('required')"
+            >
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="email?.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div
+          formArrayName="hobby"
+          *ngFor="let hobby of hobby.controls; let i = index"
+        >
+          <div class="hobby" [formGroupName]="i">
+            <mat-form-field class="example-full-width">
+              <mat-label>Hobbies</mat-label>
+              <input matInput matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Duration</mat-label>
+              <input matInput matInput formControlName="duration" />
+            </mat-form-field>
+            <div class="hobby__delete-btn">
+              <mat-icon class="input-remove" (click)="removeHobby(i)">
+                delete_outline
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+        <mat-error style="text-align: center" *ngIf="!hobby.length"
+          >Add hobby!</mat-error
+        >
+        <div class="hobby__add-btn">
+          <button mat-raised-button class="btn-yellow" (click)="addHobby()">
+            <mat-icon>add</mat-icon>
+            <span>Add hobby</span>
+          </button>
+        </div>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <button mat-raised-button (click)="reset()" color="warn">RESET</button>
+        <button
+          mat-raised-button
+          *ngIf="userForm.valid"
+          (click)="submit()"
+          color="primary"
+        >
+          SUBMIT
+        </button>
+        <button mat-raised-button *ngIf="!userForm.valid" disabled>
+          SUBMIT
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+  <app-spinner></app-spinner>
+</div>

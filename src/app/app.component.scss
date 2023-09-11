@@ -1,0 +1,55 @@
+.app {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+mat-card {
+  max-width: 600px;
+  width: 100%;
+  margin: 30px;
+}
+mat-card-header {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 24px;
+}
+mat-form-field {
+  width: 100%;
+}
+mat-card-actions {
+  gap: 16px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.framework {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  column-gap: 20px;
+}
+.hobby {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  column-gap: 20px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  &__delete-btn {
+    padding: 8px;
+  }
+  &__add-btn {
+    text-align: center;
+    height: 60px;
+  }
+}
